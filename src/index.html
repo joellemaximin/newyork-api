@@ -4,18 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <title>Top New-York Stories</title>
 </head>
+<script>
+
+var url = "https://api.nytimes.com/svc/topstories/v2/home.json";
+url += '?' + $.param({
+    'api-key': 'QropoB1jKqlMtbRyu7zvuxsz3nrGntLq',
+    'section': 'World'
+});
+
+$.ajax({
+    url: url,
+    method: 'GET',
+})
+.then(data =>{
+    // console.log(result.results[0].title);
+
+    console.log(data);
+    let output = '';
+    data.results.forEach(story => {
+        output += `
+        <ul class='api-list'>
+            <li><h1>${story['title']}</h1></li>
+            <img ${story['multimedia']} />
+            <li>${story['abstract']}</li>
+            <li>${story['url']}</li>
+            <li>${story['created_date']}</li>
+
+        </ul>
+        `;
+    })
+    document.querySelector("#output").innerHTML = output;
+})
+.catch(function(err){
+    throw err;
+})
+
+
+
+</script>
 <body>
-    <h2>To Stories</h2>
-    <div>
-        <img src="images/architec.jpg"/>
-        <div>
-            <h1>Title</h1>
-            <p>Text</p>
-            <a href="">Link</a>
-        </div>
-    </div>
-    
+    <h2>Top Stories</h2>
+    <div id="output"></div>
 </body>
 </html>
