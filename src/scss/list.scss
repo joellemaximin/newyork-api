@@ -1,0 +1,21 @@
+$bgColor: rgb(190, 118, 118);
+
+body{
+    background-color: $bgColor;
+}
+
+h1{
+    color: rgb(118, 190, 190);
+}
+
+#button:hover {
+    cursor: pointer;
+}
+
+.collapse {
+text-align: center;
+font-weight: bold;
+border-top: solid black 3px;
+border-bottom: solid black 3px;
+display: none;
+}
